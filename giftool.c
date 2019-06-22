@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
 	 * getopt(3) here rather than Gershom's argument getter because
 	 * preserving the order of operations is important.
 	 */
-	while ((status = getopt(argc, argv, "a:b:d:f:i:n:p:s:u:x:")) != EOF) {
+	while ((status = getopt(argc, argv, "a:b:d:f:i:n:p:s:t:u:x:")) != EOF) {
 		if (top >= operations + MAX_OPERATIONS) {
 			(void)fprintf(stderr, "giftool: too many operations.");
 			exit(EXIT_FAILURE);
@@ -211,7 +211,10 @@ int main(int argc, char **argv) {
 			top->mode = userinput;
 			top->flag = getbool(optarg);
 			break;
-
+		case 't':
+			top->mode = transparent;
+			top->color = atoi(optarg);
+			break;
 		case 'x':
 			top->mode = disposal;
 			top->dispose = atoi(optarg);
